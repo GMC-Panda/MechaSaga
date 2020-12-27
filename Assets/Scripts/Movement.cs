@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿// GENERATED AUTOMATICALLY FROM 'Assets/PlayerControl.inputactions'
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,7 +15,7 @@ public class Movement : MonoBehaviour
     [SerializeField] Camera playerCamera;
     [SerializeField] float rayCastDistance;
 
-    Rigidbody rigidbody;
+    Rigidbody playerRigidbody;
     PlayerControl playerControl;
     bool isGrounded = true;
     BoxCollider boxCollider;
@@ -32,7 +31,7 @@ public class Movement : MonoBehaviour
         kb = InputSystem.GetDevice<Keyboard>();       
         playerControl = new PlayerControl();
         boxCollider = GetComponent<BoxCollider>();
-        rigidbody = GetComponent<Rigidbody>();
+        playerRigidbody = GetComponent<Rigidbody>();
         
     }
     private void OnEnable()
@@ -120,10 +119,10 @@ public class Movement : MonoBehaviour
     }
     public void GravityManipulation()
     {
-        if (rigidbody.velocity.y < 0)            
-            rigidbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        else if (rigidbody.velocity.y > 0 && !kb.spaceKey.isPressed)
-           rigidbody.velocity += Vector3.up * Physics.gravity.y * (jumpHeightMultiplier - 1) * Time.deltaTime;
+        if (playerRigidbody.velocity.y < 0)            
+            playerRigidbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        else if (playerRigidbody.velocity.y > 0 && !kb.spaceKey.isPressed)
+           playerRigidbody.velocity += Vector3.up * Physics.gravity.y * (jumpHeightMultiplier - 1) * Time.deltaTime;
     }
 }
 
